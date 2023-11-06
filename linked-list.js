@@ -95,12 +95,22 @@ class LinkedList {
   getAt(idx) {
     if (idx >= this.length) throw new Error("Index is invalid");
 
+    // let current = this.head;
+    // for (let i = 0; i < this.length; i++) {
+    //   if (i === idx) {
+    //     return current.val;
+    //   }
+    //   current = current.next;
+    // }
+
+    let i = 0;
     let current = this.head;
-    for (let i = 0; i < this.length; i++) {
-      if (i === idx) {
-        return current.val;
-      }
+
+    while (i < this.length) {
+      if (i === idx) return current.val;
+
       current = current.next;
+      i++;
     }
   }
 
