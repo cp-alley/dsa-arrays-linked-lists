@@ -48,7 +48,7 @@ class LinkedList {
 
     // Handle list length 1
     if (this.length === 1) {
-      const popped = this.tail.val
+      const popped = this.tail.val;
       this.head = null;
       this.tail = null;
       this.length -= 1;
@@ -59,7 +59,7 @@ class LinkedList {
     let current = this.head;
     while (current.next !== null) {
       if (current.next === this.tail) {
-        const popped = this.tail.val
+        const popped = this.tail.val;
         this.tail = current;
         this.length -= 1;
         return popped;
@@ -71,14 +71,43 @@ class LinkedList {
   /** shift(): return & remove first item. */
 
   shift() {
+    // Handle empty list
+    if (this.head === null) throw new Error("List is empty");
 
+    // Handle list length = 1
+    if (this.length === 1) {
+      const popped = this.head.val;
+      this.head = null;
+      this.tail = null;
+      this.length -= 1;
+      return popped;
+    }
+
+    // Handle length > 1
+    const popped = this.head.val;
+    this.head = this.head.next;
+    this.length -= 1;
+    return popped;
   }
 
   /** getAt(idx): get val at idx. */
 
   getAt(idx) {
+    if (idx >= this.length) throw new Error("Index is invalid");
 
+    let current = this.head;
+    for (let i = 0; i < this.length; i++) {
+      if (i === idx) {
+        return current.val;
+      }
+      current = current.next;
+    }
   }
+
+  /** [dog, cat, puppy] length = 3
+   *
+   *
+   */
 
   /** setAt(idx, val): set val at idx to val */
 
