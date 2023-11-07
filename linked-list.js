@@ -175,8 +175,7 @@ class LinkedList {
   /** removeAt(idx): return & remove item at idx, */
 
   removeAt(idx) {
-    //FIXME: edge case for when removing at index 0 when list is empty
-    if (idx > this.length || idx < 0) throw new Error("invalid index");
+    if (idx >= this.length || idx < 0) throw new Error("invalid index");
 
     if (idx === 0) {
       return this.shift();
@@ -203,7 +202,19 @@ class LinkedList {
   /** average(): return an average of all values in the list */
 
   average() {
+    if (this.length === 0) return 0;
 
+    let count = 0;
+
+    let i = 0;
+    let current = this.head;
+    while (i < this.length) {
+      count += current.val;
+      current = current.next;
+      i++;
+    }
+
+    return count / this.length;
   }
 }
 
