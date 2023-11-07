@@ -114,11 +114,6 @@ class LinkedList {
     }
   }
 
-  /** [dog, cat, puppy] length = 3
-   *
-   *
-   */
-
   /** setAt(idx, val): set val at idx to val */
 
   setAt(idx, val) {
@@ -150,6 +145,11 @@ class LinkedList {
       return;
     }
 
+    if (idx === this.length) {
+      this.push(val);
+      return;
+    }
+
     const newNode = new Node(val);
 
     let current = this.head;
@@ -172,15 +172,32 @@ class LinkedList {
     this.length += 1;
   }
 
-  // [dog, cat, puppy] insert("frog", 2) => [dog, cat, puppy]
-  // node(idx - 1) -> newNode -> node(idx)
-  // node(idx - 1).next = newNode
-  // node(idx) newNode.next = node(idx)
-
   /** removeAt(idx): return & remove item at idx, */
 
   removeAt(idx) {
+    //FIXME: edge case for when removing at index 0 when list is empty
+    if (idx > this.length || idx < 0) throw new Error("invalid index");
 
+    if (idx === 0) {
+      return this.shift();
+    }
+
+    if (idx === this.length) {
+      return this.pop();
+    }
+
+    let current = this.head;
+    let i = 0;
+    while (i < this.length) {
+      if (i === idx - 1) {
+        let temp = current.next.val;
+        current.next = current.next.next;
+        this.length -= 1;
+        return temp;
+      }
+      i++;
+      current = current.next;
+    }
   }
 
   /** average(): return an average of all values in the list */
