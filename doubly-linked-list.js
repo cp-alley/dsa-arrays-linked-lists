@@ -5,7 +5,7 @@ class Node {
   next = null;
   prev = null;
 
-  constructor(val, prev=null, next=null) {
+  constructor(val, prev = null, next = null) {
     this.val = val;
     this.prev = prev;
     this.next = next;
@@ -50,9 +50,10 @@ class DoublyLinkedList {
 
   /** unshift(val): add new value to start of list. */
 
-  unshift(val) { //TODO: do the hookups
+  unshift(val) {
     const newNode = new Node(val, null, this.head);
-    if (this)
+    if (this.tail === null) this.tail = newNode;
+    if (this.head !== null) this.head.prev = newNode;
     this.head = newNode;
     this.length += 1;
   }
